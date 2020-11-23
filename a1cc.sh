@@ -3,7 +3,7 @@ test $# -ne 2 && {
   echo "[Usage]   $0 hamlog_data.csv a1c_member_list"
   exit 1
 }
-TEMP=mktemp
+TEMP=$(mktemp)
 awk -F ',' '{print $1}' $1 | sed 's%/.*%%g' | sort | uniq >$TEMP
 M=$(comm -12 $TEMP <(awk '{print $1}' $2 | sort) | wc -l)
 echo "members: $M"
